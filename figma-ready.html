@@ -3,845 +3,1052 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — Portfolio (Figma Ready)</title>
+  <title>Eddie — Portfolio (Figma Ready)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Bebas+Neue&family=Saira+Extra+Condensed:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Design System & Custom Tokens */
-    :root {
-      --bg: #050505;
-      --text: #f3f1ed;
-      --muted: #8e8d8a;
-      --line: rgba(255, 255, 255, 0.12);
-      --line-strong: rgba(255, 255, 255, 0.28);
-      --accent: #efe26b; /* Accent warm yellow */
-      --font-display: "Druk Condensed Super", "Antonio", "Saira Extra Condensed", "Bebas Neue", sans-serif;
-      --font-body: "Inter", sans-serif;
-      --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    /* Local Druk Font Linking */
-    @font-face {
-      font-family: "Druk Condensed Super";
-      src: url("assets/fonts/DrukXXCond-Super.woff2") format("woff2"),
-           url("assets/fonts/DrukXXCond-Super-Trial.otf") format("opentype"),
-           url("assets/fonts/DrukXXCond-Super.woff") format("woff"),
-           url("assets/fonts/DrukXXCond-Super.ttf") format("truetype"),
-           url("assets/fonts/DrukXXCond-Super.otf") format("opentype");
-      font-weight: 900;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    /* Reset and Global Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      overflow-x: hidden;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Page Container */
-    .page {
-      padding: 32px 48px 24px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      max-width: 1800px;
-      margin: 0 auto;
-    }
-
-    /* Header Topbar */
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text);
-      z-index: 10;
-    }
-
-    .topbar .brand {
-      display: flex;
-      align-items: center;
-    }
-
-    .topbar .brand .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: var(--text);
-      display: inline-block;
-      margin-left: 8px;
-    }
-
-    .topbar .menu {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      transition: opacity 0.2s ease;
-    }
-
-    .topbar .menu:hover {
-      opacity: 0.8;
-    }
-
-    .topbar .menu .plus {
-      margin-left: 8px;
-      font-size: 13px;
-      font-weight: 400;
-    }
-
-    /* Hero Section Layout Grid */
-    .hero {
-      display: grid;
-      grid-template-columns: 1.45fr 1fr;
-      gap: 64px;
-      margin-top: 40px;
-      align-items: start;
-      flex-grow: 1;
-    }
-
-    /* Left Column */
-    .left-col {
-      position: relative;
-      padding-left: 88px; /* Room for absolutely positioned vertical indicators */
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Sidebar Information on Far Left */
-    .sidebar-info {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 88px;
-      pointer-events: none;
-    }
-
-    .vertical-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      color: var(--muted);
-      text-transform: uppercase;
-      position: absolute;
-      white-space: nowrap;
-    }
-
-    .vertical-label.lets-create {
-      top: 35%;
-      transform: rotate(-90deg) translateX(-50%);
-      transform-origin: left center;
-    }
-
-    .vertical-label.scroll-down {
-      bottom: 150px;
-      transform: rotate(-90deg) translateX(-50%);
-      transform-origin: left center;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .vertical-label.scroll-down .arrow-down {
-      transform: rotate(90deg); /* Adjust arrow for reading perspective */
-      display: inline-block;
-    }
-
-    .copyright {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-      line-height: 1.3;
-    }
-
-    /* CONTACT Title */
-    .contact-title {
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: clamp(80px, 27.5vw, 415px);
-      line-height: 0.8;
-      letter-spacing: -0.01vw;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 40px;
-      display: inline-block;
-      transform: scaleX(2.67);
-      transform-origin: left center;
-    }
-
-    /* Left Subgrid Structure */
-    .left-subgrid {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      grid-template-rows: auto auto;
-      column-gap: 48px;
-      row-gap: 24px;
-    }
-
-    .intro-box {
-      grid-row: 1;
-      grid-column: 1;
-      align-self: start;
-      position: relative;
-      padding: 0 28px;
-      max-width: 320px;
-    }
-
-    .lets-text-wrapper {
-      grid-row: 1;
-      grid-column: 2;
-      align-self: start;
-    }
-
-    .hand-card-wrapper {
-      grid-row: 2;
-      grid-column: 1;
-      align-self: end;
-    }
-
-    .talk-text-wrapper {
-      grid-row: 2;
-      grid-column: 2;
-      align-self: end;
-    }
-
-    .intro-text {
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 1.45;
-      letter-spacing: 0.01em;
-      color: #d6d3cd;
-      text-transform: uppercase;
-    }
-
-    .paren {
-      position: absolute;
-      font-size: 44px;
-      font-weight: 300;
-      line-height: 1;
-      color: var(--text);
-      opacity: 0.85;
-    }
-
-    .paren-left {
-      left: 4px;
-      top: -8px;
-    }
-
-    .paren-right {
-      right: 4px;
-      top: -8px;
-    }
-
-    .hand-card {
-      position: relative;
-      width: 172px;
-      aspect-ratio: 0.72;
-      margin-left: auto; /* Push card to align with the right of column 1 */
-      cursor: pointer;
-    }
-
-    .hand-card img,
-    .hand-card model-viewer {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .hand-card img {
-      filter: invert(1) contrast(1.15) brightness(0.95);
-      mix-blend-mode: screen; /* Removes background of the inverted image to float like a sticker */
-    }
-
-    .hand-card:hover img,
-    .hand-card:hover model-viewer {
-      transform: scale(1.06);
-    }
-
-    .lets-talk-wrapper {
-      grid-row: 1 / span 2;
-      grid-column: 2;
-      align-self: start;
-      color: #fff;
-      font-family: 'Bebas Neue', sans-serif;
-      white-space: nowrap;
-    }
-
-    .lets-text {
-      margin: 0;
-      font-size: clamp(80px, 9.25vw, 140px);
-      line-height: 1.357;
-      letter-spacing: 4.2px;
-      text-transform: uppercase;
-      font-weight: 400;
-    }
-
-    .talk-text {
-      margin: 0;
-      font-size: clamp(140px, 16.5vw, 250px);
-      line-height: 0.76;
-      letter-spacing: -5px;
-      text-transform: uppercase;
-      font-weight: 400;
-    }
-
-    /* Right Column */
-    .right-col {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      padding-top: 12px;
-    }
-
-    /* Bio Section with Spark + Text */
-    .bio-container {
-      display: flex;
-      gap: 32px;
-      align-items: flex-start;
-    }
-
-    .wheel-wrapper {
-      flex-shrink: 0;
-      width: 142px;
-      height: 152px;
-      position: relative;
-    }
-
-    .wheel-graphic {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
-    @keyframes slow-spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .bio-text {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .bio-paragraph {
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 1.45;
-      letter-spacing: 0.06em;
-      color: #dbdbdb;
-      text-transform: uppercase;
-    }
-
-    .bio-paragraph .accent {
-      color: var(--accent);
-    }
-
-    .bio-cta {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--text);
-      text-transform: uppercase;
-    }
-
-    /* Badge Rotating Container */
-    .badge-container {
-      display: flex;
-      justify-content: flex-end;
-      padding-right: 24px;
-    }
-
-    .ring {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      transition: border-color 0.3s ease;
-    }
-
-    .ring:hover {
-      border-color: rgba(255, 255, 255, 0.4);
-    }
-
-    .circle-text {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      animation: spin 20s linear infinite;
-    }
-
-    .circle-text span {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform-origin: 0 0;
-      color: var(--text);
-      font-size: 7.5px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      white-space: pre;
-    }
-
-    .center-arrow {
-      font-size: 28px;
-      line-height: 1;
-      color: var(--text);
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .ring:hover .center-arrow {
-      transform: scale(1.15) translate(2px, -2px);
-    }
-
-    /* Spin Animation */
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* Contact Rows List */
-    .contact-list {
-      border-top: 1px solid var(--line);
-      margin-top: 12px;
-    }
-
-    .contact-row {
-      display: grid;
-      grid-template-columns: 48px 1.5fr 48px 2.2fr 48px;
-      align-items: center;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--line);
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.3s ease;
-    }
-
-    .row-idx {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-    }
-
-    .row-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(24px, 3vw, 42px);
-      line-height: 1.0;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-weight: 400;
-      display: inline-block;
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .row-arrow-inline {
-      font-size: 18px;
-      color: var(--muted);
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
-    }
-
-    .row-value {
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      color: var(--muted);
-      transition: color 0.3s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .row-go-circle {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      display: grid;
-      place-items: center;
-      justify-self: end;
-      transition: var(--transition-smooth);
-    }
-
-    .row-go-arrow {
-      font-size: 14px;
-      line-height: 1;
-      color: var(--text);
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
-    }
-
-    /* Premium Hover Interactions for List Items */
-    .contact-row:hover {
-      border-color: var(--line-strong);
-    }
-
-    .contact-row:hover .row-label {
-      transform: translateX(6px);
-    }
-
-    .contact-row:hover .row-arrow-inline {
-      transform: translateX(8px);
-      color: var(--accent);
-    }
-
-    .contact-row:hover .row-value {
-      color: var(--text);
-      transform: translateX(4px);
-    }
-
-    .contact-row:hover .row-go-circle {
-      background-color: var(--text);
-      border-color: var(--text);
-      transform: scale(1.08) rotate(45deg);
-    }
-
-    .contact-row:hover .row-go-arrow {
-      color: var(--bg);
-    }
-
-    /* Footer Section */
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-top: 12px;
-    }
-
-    .footer-sep {
-      color: rgba(255, 255, 255, 0.16);
-      font-weight: 400;
-    }
-
-    /* ==========================================================================
-       Responsive Breakpoints
-       ========================================================================== */
-
-    /* Laptop / Small Desktop */
-    @media (max-width: 1300px) {
-      .hero {
-        gap: 40px;
-      }
-      .left-col {
-        padding-left: 72px;
-      }
-      .sidebar-info {
-        width: 72px;
-      }
-      .left-subgrid {
-        gap: 32px;
-      }
-    }
-
-    /* Tablet Layout */
-    @media (max-width: 1024px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 56px;
-        margin-top: 24px;
-      }
-      
-      .left-col {
-        padding-left: 0; /* Remove side area on tablet for horizontal room */
-      }
-
-      .sidebar-info {
-        display: none; /* Hide rotated labels on tablet */
-      }
-
-      .left-subgrid {
-        grid-template-columns: 1.1fr 1fr;
-      }
-
-      .right-col {
-        gap: 48px;
-        padding-top: 0;
-      }
-
-      .badge-container {
-        justify-content: flex-start;
-      }
-    }
-
-    /* Small Tablet / Mobile */
-    @media (max-width: 768px) {
-      .page {
-        padding: 24px 20px 20px;
-      }
-
-      .headline {
-        margin-bottom: 24px;
-      }
-
-      .left-subgrid {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        align-items: flex-start;
-      }
-
-      .intro-box {
-        order: 1;
-        padding: 0 20px;
-        max-width: none;
-      }
-
-      .lets-talk-wrapper {
-        order: 2;
-      }
-
-      .hand-card-wrapper {
-        order: 3;
-        width: 100%;
-      }
-
-      .wheel-wrapper {
-        width: 80px;
-        height: 86px;
-        margin-bottom: 8px;
-      }
-
-      .paren-left {
-        left: 0;
-      }
-
-      .paren-right {
-        right: 0;
-      }
-
-      .hand-card {
-        margin-left: 0; /* Align left on mobile */
-        width: 100%;
-        max-width: 200px;
-        aspect-ratio: 0.75;
-      }
-
-      .lets-text {
-        font-size: clamp(60px, 10vw, 100px);
-      }
-      
-      .talk-text {
-        font-size: clamp(100px, 16vw, 180px);
-      }
-
-      /* Compact List Row for Mobile */
-      .contact-row {
-        grid-template-columns: 32px 1fr auto;
-        grid-template-areas: 
-          "idx label go"
-          "idx value value";
-        gap: 8px 12px;
-        padding: 18px 0;
-      }
-
-      .row-idx {
-        grid-area: idx;
-        align-self: start;
-        margin-top: 4px;
-      }
-
-      .row-label {
-        grid-area: label;
-        font-size: clamp(28px, 6vw, 40px);
-      }
-
-      .row-arrow-inline {
-        display: none; /* Hide intermediate arrow on mobile */
-      }
-
-      .row-value {
-        grid-area: value;
-        font-size: 12px;
-        opacity: 0.85;
-      }
-
-      .row-go-circle {
-        grid-area: go;
-        width: 34px;
-        height: 34px;
-        align-self: center;
-      }
-
-      /* Disable transitions on mobile row labels/arrows to prevent layout jumping */
-      .contact-row:hover .row-label,
-      .contact-row:hover .row-value {
-        transform: none;
-      }
-
-      .footer {
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: center;
-        text-align: center;
-        line-height: 1.5;
-      }
-
-      .footer-sep {
-        display: none; /* Hide separators, rely on wrapping */
-      }
-      
-      .footer span {
-        width: 100%;
-      }
-    }
-
-    /* Very Small Screen Mobile */
-    @media (max-width: 480px) {
-      .topbar {
-        font-size: 11px;
-      }
-      
-      .topbar .brand .dot {
-        width: 5px;
-        height: 5px;
-        margin-left: 6px;
-      }
-
-      .lets-text {
-        font-size: 54px;
-      }
-      
-      .talk-text {
-        font-size: 96px;
-      }
-
-      .intro-text {
-        font-size: 12px;
-      }
-    }
-
-    /* Proportional Scaling Overrides for Desktop aspect ratios */
-    @media (min-width: 1200px) {
-      .page {
-        padding: 2.1vh 1.4vw 1.6vh;
-        max-width: 100%;
-        width: 100%;
-        min-height: 100vh;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      
-      .hero {
-        grid-template-columns: 61.8% 1fr;
-        gap: 1vw;
-        margin-top: 2.6vh;
-      }
-      
-      .left-col {
-        padding-left: 0;
-      }
-      
-      .sidebar-info {
-        position: absolute;
-        left: -0.8vw;
-        width: 1.5vw;
-      }
-      
-      .contact-title {
-        font-size: 27.5vw;
-        margin-bottom: 2.6vh;
-      }
-      
-      .left-subgrid {
-        grid-template-columns: 39.8% 1fr;
-        column-gap: 3.2%;
-      }
-      
-      .intro-box {
-        max-width: 85%;
-        padding: 0 1.8vw;
-      }
-      
-      .intro-text {
-        font-size: clamp(12px, 0.85vw, 16px);
-      }
-      
-      .paren {
-        font-size: clamp(36px, 2.9vw, 56px);
-      }
-      
-      .paren-left {
-        left: 0.2vw;
-        top: -0.5vw;
-      }
-      
-      .paren-right {
-        right: 0.2vw;
-        top: -0.5vw;
-      }
-      
-      .hand-card {
-        width: 46%;
-      }
-      
-      .lets-text {
-        font-size: 9.25vw;
-        line-height: 1.357;
-        letter-spacing: 0.3vw;
-      }
-      
-      .talk-text {
-        font-size: 16.5vw;
-        line-height: 0.76;
-        letter-spacing: -0.33vw;
-      }
-      
-      .wheel-wrapper {
-        width: 9.4vw;
-        height: 10vw;
-      }
-      
-      .bio-paragraph {
-        font-size: clamp(12px, 0.85vw, 16px);
-      }
-      
-      .bio-cta {
-        font-size: clamp(12px, 0.85vw, 16px);
-      }
-    }
-  </style>
+@font-face {
+  font-family: "Druk Condensed Super";
+  src: url("assets/fonts/DrukXXCond-Super.woff2") format("woff2"),
+       url("assets/fonts/DrukXXCond-Super-Trial.otf") format("opentype"),
+       url("assets/fonts/DrukXXCond-Super.woff") format("woff"),
+       url("assets/fonts/DrukXXCond-Super.ttf") format("truetype"),
+       url("assets/fonts/DrukXXCond-Super.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Design System & Custom Tokens */
+:root {
+  --bg: #050505;
+  --text: #f3f1ed;
+  --muted: #8e8d8a;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.28);
+  --accent: #efe26b; /* Accent warm yellow */
+  --font-display: "Druk Condensed Super", "Antonio", "Saira Extra Condensed", "Bebas Neue", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Reset and Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Global Fixed Header Navigation */
+.global-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  background-color: rgba(5, 5, 5, 0.85); /* translucent dark */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  z-index: 1000;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.global-header a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.global-header a:hover {
+  color: var(--accent);
+}
+
+.global-header .brand {
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.global-header .brand .dot {
+  color: var(--accent);
+  margin-left: 4px;
+}
+
+.global-header .nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.global-header .nav-link {
+  opacity: 0.75;
+}
+
+.global-header .nav-link:hover {
+  opacity: 1;
+}
+
+/* Multi-Section Styles */
+.section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  scroll-margin-top: 80px;
+}
+
+/* Home Section Specifics */
+.section-home {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg);
+  padding-top: 80px;
+}
+
+.home-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.home-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(50px, 14vw, 240px);
+  line-height: 0.85;
+  letter-spacing: -0.01vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: scaleX(2.67);
+  transform-origin: center center;
+  color: var(--text);
+}
+
+.home-title .line-white {
+  color: var(--text);
+}
+
+.home-title .line-yellow {
+  color: var(--accent);
+}
+
+.home-bottom {
+  padding-bottom: 4vh;
+  width: 100%;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.home-bottom .tagline {
+  font-size: clamp(10px, 0.75vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+}
+
+.home-bottom .tagline .dot {
+  color: var(--accent);
+  margin: 0 12px;
+  font-size: 1.2em;
+}
+
+/* Minimalist Templates for Work & About */
+.section-minimalist {
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.section-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-idx {
+  font-size: clamp(10px, 0.75vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.section-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-size: clamp(40px, 8vw, 120px);
+  line-height: 1.0;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+/* Page Container */
+.page {
+  padding: 32px 48px 24px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+/* Header Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  z-index: 10;
+}
+
+.topbar .brand {
+  display: flex;
+  align-items: center;
+}
+
+.topbar .brand .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--text);
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.topbar .menu {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.topbar .menu:hover {
+  opacity: 0.8;
+}
+
+.topbar .menu .plus {
+  margin-left: 8px;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* Hero Section Layout Grid */
+.hero {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 64px;
+  margin-top: 40px;
+  align-items: start;
+  flex-grow: 1;
+}
+
+/* Left Column */
+.left-col {
+  position: relative;
+  padding-left: 88px; /* Room for absolutely positioned vertical indicators */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar Information on Far Left */
+.sidebar-info {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 88px;
+  pointer-events: none;
+}
+
+.vertical-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.vertical-label.lets-create {
+  top: 35%;
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: left center;
+}
+
+.vertical-label.scroll-down {
+  bottom: 150px;
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: left center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vertical-label.scroll-down .arrow-down {
+  transform: rotate(90deg); /* Adjust arrow for reading perspective */
+  display: inline-block;
+}
+
+.copyright {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+/* CONTACT Title */
+.contact-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(80px, 27.5vw, 415px);
+  line-height: 0.8;
+  letter-spacing: -0.01vw;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 40px;
+  display: inline-block;
+  transform: scaleX(2.67);
+  transform-origin: left center;
+}
+
+/* Left Subgrid Structure */
+.left-subgrid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 48px;
+  row-gap: 24px;
+}
+
+.intro-box {
+  grid-row: 1;
+  grid-column: 1;
+  align-self: start;
+  position: relative;
+  padding: 0 28px;
+  max-width: 320px;
+}
+
+.lets-text-wrapper {
+  grid-row: 1;
+  grid-column: 2;
+  align-self: start;
+}
+
+.hand-card-wrapper {
+  grid-row: 2;
+  grid-column: 1;
+  align-self: end;
+}
+
+.talk-text-wrapper {
+  grid-row: 2;
+  grid-column: 2;
+  align-self: end;
+}
+
+.intro-text {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: #d6d3cd;
+  text-transform: uppercase;
+}
+
+.paren {
+  position: absolute;
+  font-size: 44px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.paren-left {
+  left: 4px;
+  top: -8px;
+}
+
+.paren-right {
+  right: 4px;
+  top: -8px;
+}
+
+.hand-card {
+  position: relative;
+  width: 172px;
+  aspect-ratio: 0.72;
+  margin-left: auto; /* Push card to align with the right of column 1 */
+  cursor: pointer;
+}
+
+.hand-card img,
+.hand-card model-viewer {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hand-card img {
+  filter: invert(1) contrast(1.15) brightness(0.95);
+  mix-blend-mode: screen; /* Removes background of the inverted image to float like a sticker */
+}
+
+.hand-card:hover img,
+.hand-card:hover model-viewer {
+  transform: scale(1.06);
+}
+
+.lets-talk-wrapper {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: start;
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  white-space: nowrap;
+}
+
+.lets-text {
+  margin: 0;
+  font-size: clamp(80px, 9.25vw, 140px);
+  line-height: 1.357;
+  letter-spacing: 4.2px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.talk-text {
+  margin: 0;
+  font-size: clamp(140px, 16.5vw, 250px);
+  line-height: 0.76;
+  letter-spacing: -5px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+/* Right Column */
+.right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 12px;
+}
+
+/* Bio Section with Spark + Text */
+.bio-container {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.wheel-wrapper {
+  flex-shrink: 0;
+  width: 142px;
+  height: 152px;
+  position: relative;
+}
+
+.wheel-graphic {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.bio-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bio-paragraph {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+  color: #dbdbdb;
+  text-transform: uppercase;
+}
+
+.bio-paragraph .accent {
+  color: var(--accent);
+}
+
+.bio-cta {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+/* Badge Rotating Container */
+.badge-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 24px;
+}
+
+.ring {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.ring:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.circle-text {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: spin 20s linear infinite;
+}
+
+.circle-text span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 0 0;
+  color: var(--text);
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: pre;
+}
+
+.center-arrow {
+  font-size: 28px;
+  line-height: 1;
+  color: var(--text);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.ring:hover .center-arrow {
+  transform: scale(1.15) translate(2px, -2px);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Contact Rows List */
+.contact-list {
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 48px 1.5fr 48px 2.2fr 48px;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.3s ease;
+}
+
+
+.row-idx {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.row-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(24px, 3vw, 42px);
+  line-height: 1.0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 400;
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.row-arrow-inline {
+  font-size: 18px;
+  color: var(--muted);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
+}
+
+.row-value {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  transition: color 0.3s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.row-go-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: grid;
+  place-items: center;
+  justify-self: end;
+  transition: var(--transition-smooth);
+}
+
+.row-go-arrow {
+  font-size: 14px;
+  line-height: 1;
+  color: var(--text);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
+}
+
+/* Premium Hover Interactions for List Items */
+.contact-row:hover {
+  border-color: var(--line-strong);
+}
+
+.contact-row:hover .row-label {
+  transform: translateX(6px);
+}
+
+.contact-row:hover .row-arrow-inline {
+  transform: translateX(8px);
+  color: var(--accent);
+}
+
+.contact-row:hover .row-value {
+  color: var(--text);
+  transform: translateX(4px);
+}
+
+.contact-row:hover .row-go-circle {
+  background-color: var(--text);
+  border-color: var(--text);
+  transform: scale(1.08) rotate(45deg);
+}
+
+.contact-row:hover .row-go-arrow {
+  color: var(--bg);
+}
+
+/* Footer Section */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+
+.footer-sep {
+  color: rgba(255, 255, 255, 0.16);
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+/* Laptop / Small Desktop */
+@media (max-width: 1300px) {
+  .hero {
+    gap: 40px;
+  }
+  .left-col {
+    padding-left: 72px;
+  }
+  .sidebar-info {
+    width: 72px;
+  }
+  .left-subgrid {
+    gap: 32px;
+  }
+}
+
+/* Tablet Layout */
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    margin-top: 24px;
+  }
+  
+  .left-col {
+    padding-left: 0; /* Remove side area on tablet for horizontal room */
+  }
+
+  .sidebar-info {
+    display: none; /* Hide rotated labels on tablet */
+  }
+
+  .left-subgrid {
+    grid-template-columns: 1.1fr 1fr;
+  }
+
+  .right-col {
+    gap: 48px;
+    padding-top: 0;
+  }
+
+  .badge-container {
+    justify-content: flex-start;
+  }
+}
+
+/* Small Tablet / Mobile */
+@media (max-width: 768px) {
+  .global-header {
+    height: 64px;
+    padding: 0 24px;
+  }
+  .global-header .nav-links {
+    gap: 24px;
+  }
+  .section {
+    scroll-margin-top: 64px;
+  }
+  .page {
+    padding: 24px 20px 20px;
+  }
+
+  .headline {
+    margin-bottom: 24px;
+  }
+
+  .left-subgrid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .intro-box {
+    order: 1;
+    padding: 0 20px;
+    max-width: none;
+  }
+
+  .lets-talk-wrapper {
+    order: 2;
+  }
+
+  .hand-card-wrapper {
+    order: 3;
+    width: 100%;
+  }
+
+  .wheel-wrapper {
+    width: 80px;
+    height: 86px;
+    margin-bottom: 8px;
+  }
+
+  .paren-left {
+    left: 0;
+  }
+
+  .paren-right {
+    right: 0;
+  }
+
+  .hand-card {
+    margin-left: 0; /* Align left on mobile */
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 0.75;
+  }
+
+  .lets-text {
+    font-size: clamp(60px, 10vw, 100px);
+  }
+  
+  .talk-text {
+    font-size: clamp(100px, 16vw, 180px);
+  }
+
+  /* Compact List Row for Mobile */
+  .contact-row {
+    grid-template-columns: 32px 1fr auto;
+    grid-template-areas: 
+      "idx label go"
+      "idx value value";
+    gap: 8px 12px;
+    padding: 18px 0;
+  }
+
+  .row-idx {
+    grid-area: idx;
+    align-self: start;
+    margin-top: 4px;
+  }
+
+  .row-label {
+    grid-area: label;
+    font-size: clamp(28px, 6vw, 40px);
+  }
+
+  .row-arrow-inline {
+    display: none; /* Hide intermediate arrow on mobile */
+  }
+
+  .row-value {
+    grid-area: value;
+    font-size: 12px;
+    opacity: 0.85;
+  }
+
+  .row-go-circle {
+    grid-area: go;
+    width: 34px;
+    height: 34px;
+    align-self: center;
+  }
+
+  /* Disable transitions on mobile row labels/arrows to prevent layout jumping */
+  .contact-row:hover .row-label,
+  .contact-row:hover .row-value {
+    transform: none;
+  }
+
+  .footer {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .footer-sep {
+    display: none; /* Hide separators, rely on wrapping */
+  }
+  
+  .footer span {
+    width: 100%;
+  }
+}
+
+/* Very Small Screen Mobile */
+@media (max-width: 480px) {
+  .topbar {
+    font-size: 11px;
+  }
+  
+  .topbar .brand .dot {
+    width: 5px;
+    height: 5px;
+    margin-left: 6px;
+  }
+
+  .lets-text {
+    font-size: 54px;
+  }
+  
+  .talk-text {
+    font-size: 96px;
+  }
+
+  .intro-text {
+    font-size: 12px;
+  }
+}
+
+/* Proportional Scaling Overrides for Desktop aspect ratios */
+@media (min-width: 1200px) {
+  .page {
+    padding: 2.1vh 1.4vw 1.6vh;
+    max-width: 100%;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .hero {
+    grid-template-columns: 61.8% 1fr;
+    gap: 1vw;
+    margin-top: 2.6vh;
+  }
+  
+  .left-col {
+    padding-left: 0;
+  }
+  
+  .sidebar-info {
+    position: absolute;
+    left: -0.8vw;
+    width: 1.5vw;
+  }
+  
+  .contact-title {
+    font-size: 27.5vw;
+    margin-bottom: 2.6vh;
+  }
+  
+  .left-subgrid {
+    grid-template-columns: 39.8% 1fr;
+    column-gap: 3.2%;
+  }
+  
+  .intro-box {
+    max-width: 85%;
+    padding: 0 1.8vw;
+  }
+  
+  .intro-text {
+    font-size: clamp(12px, 0.85vw, 16px);
+  }
+  
+  .paren {
+    font-size: clamp(36px, 2.9vw, 56px);
+  }
+  
+  .paren-left {
+    left: 0.2vw;
+    top: -0.5vw;
+  }
+  
+  .paren-right {
+    right: 0.2vw;
+    top: -0.5vw;
+  }
+  
+  .hand-card {
+    width: 46%;
+  }
+  
+  .lets-text {
+    font-size: 9.25vw;
+    line-height: 1.357;
+    letter-spacing: 0.3vw;
+  }
+  
+  .talk-text {
+    font-size: 16.5vw;
+    line-height: 0.76;
+    letter-spacing: -0.33vw;
+  }
+  
+  .wheel-wrapper {
+    width: 9.4vw;
+    height: 10vw;
+  }
+  
+  .bio-paragraph {
+    font-size: clamp(12px, 0.85vw, 16px);
+  }
+  
+  .bio-cta {
+    font-size: clamp(12px, 0.85vw, 16px);
+  }
+}
+
+</style>
 </head>
 <body>
-  <main class="page">
+  <!-- Global Navigation Header -->
+  <header class="global-header">
+    <div class="brand"><a href="#home">EDDIE<span class="dot">•</span></a></div>
+    <nav class="nav-links">
+      <a href="#work" class="nav-link">WORK</a>
+      <a href="#about" class="nav-link">ABOUT</a>
+      <a href="#contact" class="nav-link">CONTACT</a>
+    </nav>
+  </header>
+
+  <!-- Section 1: Home -->
+  <section id="home" class="section section-home">
+    <div class="home-center">
+      <h1 class="home-title">
+        <span class="line-white">CREATIVE</span>
+        <span class="line-yellow">DEVELOPER</span>
+      </h1>
+    </div>
+    <div class="home-bottom">
+      <p class="tagline">DESIGN <span class="dot">•</span> CODE <span class="dot">•</span> SHIP</p>
+    </div>
+  </section>
+
+  <!-- Section 2: Work -->
+  <section id="work" class="section section-minimalist">
+    <div class="section-center">
+      <span class="section-idx">01</span>
+      <h2 class="section-heading">SELECTED WORK</h2>
+    </div>
+  </section>
+
+  <!-- Section 3: About -->
+  <section id="about" class="section section-minimalist">
+    <div class="section-center">
+      <span class="section-idx">02</span>
+      <h2 class="section-heading">ABOUT ME</h2>
+    </div>
+  </section>
+
+  <!-- Section 4: Contact -->
+  <section id="contact" class="section section-contact">
+    <div class="page">
 
 
     <!-- Main Layout Grid -->
@@ -960,9 +1167,9 @@
           <span>GMT +5:30</span>
         </footer>
       </aside>
-
     </div>
-  </main>
+  </div>
+</section>
 
   <script>
     // Inject spinning circular text
