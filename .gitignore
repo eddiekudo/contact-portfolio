@@ -1,0 +1,8 @@
+# Local history files or log files
+*.log
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
+.env
+.system_generated/
