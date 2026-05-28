@@ -119,20 +119,34 @@ html, body {
 /* Multi-Section Styles */
 .section {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg);
   box-sizing: border-box;
+  padding-top: 80px; /* Offset for fixed header */
   scroll-margin-top: 80px;
+  overflow: hidden;
+}
+
+/* The actual 1512x982 canvas container */
+.viewport-container {
+  width: 1512px;
+  height: 982px;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: var(--bg);
+  transform: scale(var(--viewport-scale, 1));
+  transform-origin: center center;
 }
 
 /* Home Section Specifics */
 .section-home {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: var(--bg);
-  padding-top: 80px;
 }
 
 .home-center {
@@ -146,9 +160,9 @@ html, body {
 .home-title {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(50px, 14vw, 240px);
+  font-size: 211px;
   line-height: 0.85;
-  letter-spacing: -0.01vw;
+  letter-spacing: -0.15px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -167,7 +181,7 @@ html, body {
 }
 
 .home-bottom {
-  padding-bottom: 4vh;
+  padding-bottom: 40px;
   width: 100%;
   text-align: center;
   flex-shrink: 0;
@@ -205,7 +219,7 @@ html, body {
 }
 
 .section-idx {
-  font-size: clamp(10px, 0.75vw, 13px);
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.15em;
   color: var(--muted);
@@ -215,7 +229,7 @@ html, body {
 .section-heading {
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
-  font-size: clamp(40px, 8vw, 120px);
+  font-size: 120px;
   line-height: 1.0;
   letter-spacing: 0.05em;
   color: var(--text);
@@ -773,6 +787,7 @@ html, body {
     gap: 24px;
   }
   .section {
+    padding-top: 64px;
     scroll-margin-top: 64px;
   }
   .page {
@@ -920,96 +935,103 @@ html, body {
   }
 }
 
-/* Proportional Scaling Overrides for Desktop aspect ratios */
-@media (min-width: 1200px) {
-  .page {
-    padding: 2.1vh 1.4vw 1.6vh;
-    max-width: 100%;
-    width: 100%;
-    min-height: 100vh;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .hero {
-    grid-template-columns: 61.8% 1fr;
-    gap: 1vw;
-    margin-top: 2.6vh;
-  }
-  
-  .left-col {
-    padding-left: 0;
-  }
-  
-  .sidebar-info {
-    position: absolute;
-    left: -0.8vw;
-    width: 1.5vw;
-  }
-  
-  .contact-title {
-    font-size: 27.5vw;
-    margin-bottom: 2.6vh;
-  }
-  
-  .left-subgrid {
-    grid-template-columns: 39.8% 1fr;
-    column-gap: 3.2%;
-  }
-  
-  .intro-box {
-    max-width: 85%;
-    padding: 0 1.8vw;
-  }
-  
-  .intro-text {
-    font-size: clamp(12px, 0.85vw, 16px);
-  }
-  
-  .paren {
-    font-size: clamp(36px, 2.9vw, 56px);
-  }
-  
-  .paren-left {
-    left: 0.2vw;
-    top: -0.5vw;
-  }
-  
-  .paren-right {
-    right: 0.2vw;
-    top: -0.5vw;
-  }
-  
-  .hand-card {
-    width: 46%;
-  }
-  
-  .lets-text {
-    font-size: 9.25vw;
-    line-height: 1.357;
-    letter-spacing: 0.3vw;
-  }
-  
-  .talk-text {
-    font-size: 16.5vw;
-    line-height: 0.76;
-    letter-spacing: -0.33vw;
-  }
-  
-  .wheel-wrapper {
-    width: 9.4vw;
-    height: 10vw;
-  }
-  
-  .bio-paragraph {
-    font-size: clamp(12px, 0.85vw, 16px);
-  }
-  
-  .bio-cta {
-    font-size: clamp(12px, 0.85vw, 16px);
-  }
+/* Locked 1512x982 Design Canvas Rules */
+.viewport-container .page {
+  padding: 21px 21px 16px;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.viewport-container .hero {
+  grid-template-columns: 61.8% 1fr;
+  gap: 15px;
+  margin-top: 26px;
+}
+
+.viewport-container .left-col {
+  padding-left: 0;
+}
+
+.viewport-container .sidebar-info {
+  position: absolute;
+  left: -12px;
+  width: 23px;
+}
+
+.viewport-container .contact-title {
+  font-size: 415px;
+  margin-bottom: 26px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: -0.15px;
+  text-transform: uppercase;
+  color: var(--text);
+  display: inline-block;
+  transform: scaleX(2.67);
+  transform-origin: left center;
+}
+
+.viewport-container .left-subgrid {
+  grid-template-columns: 39.8% 1fr;
+  column-gap: 3.2%;
+}
+
+.viewport-container .intro-box {
+  max-width: 85%;
+  padding: 0 27px;
+}
+
+.viewport-container .intro-text {
+  font-size: 13px;
+}
+
+.viewport-container .paren {
+  font-size: 44px;
+}
+
+.viewport-container .paren-left {
+  left: 3px;
+  top: -8px;
+}
+
+.viewport-container .paren-right {
+  right: 3px;
+  top: -8px;
+}
+
+.viewport-container .hand-card {
+  width: 46%;
+}
+
+.viewport-container .lets-text {
+  font-size: 140px;
+  line-height: 1.357;
+  letter-spacing: 4.5px;
+}
+
+.viewport-container .talk-text {
+  font-size: 250px;
+  line-height: 0.76;
+  letter-spacing: -5px;
+}
+
+.viewport-container .wheel-wrapper {
+  width: 142px;
+  height: 152px;
+}
+
+.viewport-container .bio-paragraph {
+  font-size: 13px;
+}
+
+.viewport-container .bio-cta {
+  font-size: 13px;
 }
 
 </style>
@@ -1027,36 +1049,43 @@ html, body {
 
   <!-- Section 1: Home -->
   <section id="home" class="section section-home">
-    <div class="home-center">
-      <h1 class="home-title">
-        <span class="line-white">CREATIVE</span>
-        <span class="line-yellow">DEVELOPER</span>
-      </h1>
-    </div>
-    <div class="home-bottom">
-      <p class="tagline">DESIGN <span class="dot">•</span> CODE <span class="dot">•</span> SHIP</p>
+    <div class="viewport-container">
+      <div class="home-center">
+        <h1 class="home-title">
+          <span class="line-white">CREATIVE</span>
+          <span class="line-yellow">DEVELOPER</span>
+        </h1>
+      </div>
+      <div class="home-bottom">
+        <p class="tagline">DESIGN <span class="dot">•</span> CODE <span class="dot">•</span> SHIP</p>
+      </div>
     </div>
   </section>
 
   <!-- Section 2: Work -->
   <section id="work" class="section section-minimalist">
-    <div class="section-center">
-      <span class="section-idx">01</span>
-      <h2 class="section-heading">SELECTED WORK</h2>
+    <div class="viewport-container">
+      <div class="section-center">
+        <span class="section-idx">01</span>
+        <h2 class="section-heading">SELECTED WORK</h2>
+      </div>
     </div>
   </section>
 
   <!-- Section 3: About -->
   <section id="about" class="section section-minimalist">
-    <div class="section-center">
-      <span class="section-idx">02</span>
-      <h2 class="section-heading">ABOUT ME</h2>
+    <div class="viewport-container">
+      <div class="section-center">
+        <span class="section-idx">02</span>
+        <h2 class="section-heading">ABOUT ME</h2>
+      </div>
     </div>
   </section>
 
   <!-- Section 4: Contact -->
   <section id="contact" class="section section-contact">
-    <div class="page">
+    <div class="viewport-container">
+      <div class="page">
 
 
     <!-- Main Layout Grid -->
@@ -1177,6 +1206,7 @@ html, body {
       </aside>
     </div>
   </div>
+</div>
 </section>
 
   <script>
@@ -1191,6 +1221,25 @@ html, body {
       const angle = i * step;
       return `<span style="transform: rotate(${angle}deg) translate(${radius}px) rotate(90deg)">${ch}</span>`;
     }).join("");
+
+    // Dynamic viewport auto-scaling for 1512x982 design canvas
+    function resizePages() {
+      const targetWidth = 1512;
+      const targetHeight = 982;
+      
+      const header = document.querySelector('.global-header');
+      const headerHeight = header ? header.offsetHeight : 80;
+      
+      const scaleX = window.innerWidth / targetWidth;
+      const scaleY = (window.innerHeight - headerHeight) / targetHeight;
+      const scale = Math.min(scaleX, scaleY);
+      
+      document.documentElement.style.setProperty('--viewport-scale', scale);
+    }
+
+    window.addEventListener('resize', resizePages);
+    window.addEventListener('DOMContentLoaded', resizePages);
+    resizePages(); // Run immediately on load
   </script>
 </body>
 </html>
