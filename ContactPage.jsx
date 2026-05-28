@@ -24,12 +24,12 @@ export default function ContactPage() {
           fontFamily: '"Humane Medium", "Antonio", sans-serif',
           fontSize: "27.5vw",
           fontWeight: 900,
-          lineHeight: 0.8,
-          letterSpacing: "-0.01vw",
+          lineHeight: 0.85,
+          letterSpacing: "0.02em",
           margin: 0,
           color: "#fff",
           display: "inline-block",
-          transform: "scaleX(2.67)",
+          transform: "scaleX(1.30)",
           transformOrigin: "left center",
         }}
       >

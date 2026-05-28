@@ -145,14 +145,14 @@ html, body {
 .home-title {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 211px;
-  line-height: 0.85;
-  letter-spacing: -0.15px;
+  font-size: 260px;
+  line-height: 0.9;
+  letter-spacing: 0.02em;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: scaleX(2.67);
+  transform: scaleX(1.30);
   transform-origin: center center;
   color: var(--text);
 }
@@ -354,13 +354,13 @@ html, body {
   font-family: var(--font-display);
   font-weight: 900;
   font-size: clamp(80px, 27.5vw, 415px);
-  line-height: 0.8;
-  letter-spacing: -0.01vw;
+  line-height: 0.85;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--text);
   margin-bottom: 40px;
   display: inline-block;
-  transform: scaleX(2.67);
+  transform: scaleX(1.30);
   transform-origin: left center;
 }
 
@@ -403,8 +403,8 @@ html, body {
 .intro-text {
   font-size: 13px;
   font-weight: 500;
-  line-height: 1.45;
-  letter-spacing: 0.01em;
+  line-height: 1.65;
+  letter-spacing: 0.05em;
   color: #d6d3cd;
   text-transform: uppercase;
 }
@@ -519,8 +519,8 @@ html, body {
 .bio-paragraph {
   font-size: 13px;
   font-weight: 500;
-  line-height: 1.45;
-  letter-spacing: 0.06em;
+  line-height: 1.65;
+  letter-spacing: 0.08em;
   color: #dbdbdb;
   text-transform: uppercase;
 }
@@ -642,7 +642,7 @@ html, body {
 .row-value {
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
   color: var(--muted);
   transition: color 0.3s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -970,12 +970,12 @@ html, body {
   margin-bottom: 26px;
   font-family: var(--font-display);
   font-weight: 900;
-  line-height: 0.8;
-  letter-spacing: -0.15px;
+  line-height: 0.85;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--text);
   display: inline-block;
-  transform: scaleX(2.67);
+  transform: scaleX(1.30);
   transform-origin: left center;
 }
 
