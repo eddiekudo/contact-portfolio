@@ -943,7 +943,7 @@ html, body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   box-sizing: border-box;
 }
 
@@ -951,10 +951,27 @@ html, body {
   grid-template-columns: 61.8% 1fr;
   gap: 15px;
   margin-top: 26px;
+  height: calc(100% - 26px);
 }
 
 .viewport-container .left-col {
   padding-left: 0;
+  height: 100%;
+}
+
+.viewport-container .left-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.viewport-container .right-col {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 12px;
 }
 
 .viewport-container .sidebar-info {
