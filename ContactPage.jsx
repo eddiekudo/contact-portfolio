@@ -21,7 +21,7 @@ export default function ContactPage() {
           position: "absolute",
           left: "1.39%",
           top: "17.51%",
-          fontFamily: '"Druk Condensed Super", "Antonio", sans-serif',
+          fontFamily: '"Humane Medium", "Antonio", sans-serif',
           fontSize: "27.5vw",
           fontWeight: 900,
           lineHeight: 0.8,
